@@ -54,7 +54,6 @@ export default function Register({navigation}){
             </TouchableOpacity>
             <Text style={{ paddingTop : 20, fontSize : 16, fontWeight : '600', color : '#CBC8D0' }}>Or register with</Text>
             </View>
-            
             <View style ={{  justifyContent: 'center',
                                 paddingTop : 5,
                                 flex: 1,
@@ -72,9 +71,7 @@ export default function Register({navigation}){
                     <Text style={{ fontSize : 18, fontWeight : '700', color : '#fff' }}>Login</Text>
                 </Pressable>
             </View>
-                               
-        
-            </ImageBackground>
+            </ImageBackground>  
         </ScrollView>
     );
 }

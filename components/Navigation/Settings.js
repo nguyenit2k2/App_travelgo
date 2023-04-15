@@ -7,21 +7,18 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from '../Customer/Login';
-import Register from '../Customer/Register'
 
 const Stack = createNativeStackNavigator();
 
 export default function SettingsNavigation(){
     return(
-      <NavigationContainer>
     <Stack.Navigator >
-      <Stack.Screen name="Home" component={Settings} />
+      <Stack.Screen name="Cài đặt" component={Settings} />
       <Stack.Screen name="Mật khẩu" component={Password} />
       <Stack.Screen name="Tổng đài trợ giúp" component={Help} />
       <Stack.Screen name="Đánh giá" component={Feedback} />
-      <Stack.Screen name="Đăng nhập" component={Login} options={{headerShown: false}}/>
+      <Stack.Screen name="Đăng nhập" component={Login} />
     </Stack.Navigator>
-    </NavigationContainer>
     )
 }
 
@@ -29,20 +26,32 @@ export default function SettingsNavigation(){
 function Settings({navigation}) {
   return (
     <View style={styles.container}>
-  
-    <View style={styles.imageContainer}>
-      <Image style={styles.image} source= {require('../Image/img_2.png')}/>
-      <View style={styles.header}>
-    <Text style={styles.title}>TRAVEL GO</Text>
-    <Text style={styles.subtitle}>Welcome to my app!</Text>
-  </View>
+      {/* <Text onPress={navigation.navigate("Mật khẩu")}>Nofication!</Text> */}
+      <View style={styles.topImage}>
+      <Image style={styles.image} source={{uri : "https://www.sandybeachdanang.com/uploads/image/images/4-Cau-Rong-Han-Cau-Thuan-Phuoc.jpg"}}/>
+      </View>
       <View style={styles.item}>
-        <TouchableOpacity onPress={()=> navigation.navigate('Đăng nhập')}>
-          <Text style={styles.text}>GO</Text>
-        </TouchableOpacity>
+      <TouchableOpacity onPress={()=> navigation.navigate('Tổng đài trợ giúp')}>
+      <View>
+        <Text style={styles.text}>Tổng đài trợ giúp</Text>
+      </View>
+      </TouchableOpacity>
+      </View>
+      <View style={styles.item}>
+      <TouchableOpacity onPress={()=> navigation.navigate('Đăng nhập')}>
+      <View>
+        <Text style={styles.text}>Đăng nhập</Text>
+      </View>
+      </TouchableOpacity>
+      </View>
+      <View style={styles.item}>
+      <TouchableOpacity >
+      <View>
+        <Text style={styles.text}>Báo lỗi</Text>
+      </View>
+      </TouchableOpacity>
       </View>
     </View>
-  </View>
   );
 }
 function Password(){
@@ -82,52 +91,38 @@ function Sendbug(){
 }
 
 const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    height: '100%',
-    alignItems: 'center',
-    backgroundColor: 'lightgray'
-  },
- 
-  imageContainer: {
-    width: '100%',
-    height: '100%',
-    position: 'relative'
-  },
-  image: {
-    width : '100%',
-    height : '100%',
-    resizeMode: 'cover'
-  },
-  header:{
-    position:'absolute',
-    width : '100%',
-    backgroundColor:'white'
- },
- title: {
-  fontSize: 24,
-  fontWeight: 'bold',
-},
-subtitle: {
-  fontSize: 18,
-  color: '#666',
-},
-  item: {
-    position: 'absolute',
-  bottom: 70,
-  alignSelf: 'center',
-  width: 100,
-  height: 100,
-  borderRadius: 50,
-  backgroundColor: 'black',
-  alignItems: 'center',
-  justifyContent: 'center',
-  },
-  text: {
-    textAlign: 'center',
-    fontSize : 40,
-    fontWeight: '700',
-    justifyContent : 'center',
-    color : '#00FFFF'
-  }
+    container: {
+      width : '100%',
+      alignItems:'center',
+      backgroundColor: 'lightgray'
+    },
+    item:{
+      width: "95%",
+      marginTop: 30,
+      height:  40,
+      borderRadius : 4,
+      borderColor : '#333',
+      borderWidth : 1,
+      alignItems:'center',
+      justifyContent : 'center',
+      backgroundColor: '#333'
+      
+    },
+    text:{
+      textAlign: 'center',
+      fontSize : 15,
+      fontWeight: '700',
+      justifyContent : 'center',
+      color : '#CD5C5C'
+    },
+    topImage : {
+      width : '100%',
+      height : '60%'
+    },
+    image: {
+      width : '95%',
+      height : '100%',
+      borderRadius: 10,
+      margin : 10,
+    }
 });
