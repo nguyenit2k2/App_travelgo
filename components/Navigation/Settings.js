@@ -17,7 +17,7 @@ export default function SettingsNavigation(){
       <Stack.Screen name="Mật khẩu" component={Password} />
       <Stack.Screen name="Tổng đài trợ giúp" component={Help} />
       <Stack.Screen name="Đánh giá" component={Feedback} />
-      <Stack.Screen name="Đăng nhập" component={Login} />
+      <Stack.Screen name="Đăng nhập" component={Login} options={{headerShown: false}} />
     </Stack.Navigator>
     )
 }

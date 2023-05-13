@@ -6,30 +6,49 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Settings from './Settings';
 import HomeScreen from './HomeScreen';
+import CartScreen from './CartScreen';
+import SearchScreen from './SearchScreen';
+import { Feather } from '@expo/vector-icons';
 const Tab = createBottomTabNavigator();
 
 export default function TabNavigation() {
 
   return (
-      <Tab.Navigator>
-      <Tab.Screen name="Trang chủ" component={HomeScreen} 
-          options={{
-            headerShown: false,
-          tabBarLabel: 'Trang chủ',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="hand-extended" color={color} size={size} />
-          ),
-        }}
-        />
-        <Tab.Screen name="Tiện ích khác" component={Settings} 
-          options={{
-            headerShown: false,
-          tabBarLabel: 'Tiện ích khác',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="hand-extended" color={color} size={size} />
-          ),
-        }}
-        />
-      </Tab.Navigator>
+    <Tab.Navigator>
+    <Tab.Screen
+      name="Trang chủ"
+      component={HomeScreen}
+      options={{
+        headerShown: false,
+        tabBarLabel: 'Trang chủ',
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="home" color={color} size={size} />
+        ),
+      }}
+    />
+    <Tab.Screen
+      name="Search"
+      component={SearchScreen}
+      options={{
+        headerShown: false,
+        tabBarLabel: 'Search',
+        tabBarIcon: ({ color, size }) => (
+          <Feather name="search" size={size} color={color} />
+        ),
+      }}
+    />
+    <Tab.Screen
+      name="Tài Khoản"
+      component={Settings}
+      options={{
+        headerShown: false,
+        tabBarLabel: 'Tài Khoản',
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="account" color={color} size={size} />
+        ),
+      }}
+    />
+  </Tab.Navigator>
+      
   );
 }

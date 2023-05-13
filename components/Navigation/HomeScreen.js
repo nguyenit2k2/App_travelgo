@@ -5,36 +5,34 @@ import { NavigationContainer } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StatusBar } from 'expo-status-bar';
-import Place from '../Items/Place';
-import Restaurant from '../Items/Restaurant';
-import Food from '../Items/Food';
-import Hotel from '../Items/Hotel';
-import Intro from '../Items/Intro';
+
 import Moving from '../Items/Moving';
-import Recomment from '../Items/Recomment';
-import HomeStay from '../Items/HomeStay';
-import Shopping from '../Items/Shopping';
-import Fun from '../Items/Fun';
 import { Link } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import PlaceNavigation from '../Items/Place';
+import FindScreen from './FindScreen';
+import PlacesScreen from './PlacesScreen';
+import PropertyInfoScreen from './PropertyInfoScreen';
+import UserScreen from './UserScreen';
+import ConfirmationScreen from './ConfirmationScreen';
+import LoginScreen from './LoginScreen';
+import RegisterScreen from './RegisterScreen';
+
 
 const Stack = createNativeStackNavigator();
 
 function HomeNavigation(){
     return(
     <Stack.Navigator>
+       <Stack.Screen name="Login" component={LoginScreen} options={{headerShown:false}}/>
+       <Stack.Screen name="Register" component={RegisterScreen} options={{headerShown:false}}/>
       <Stack.Screen name="TravelGO" component={HomeScreen} />
-      <Stack.Screen name="Lời khuyên" component={Recomment} />
-      <Stack.Screen name="Giới thiệu" component={Intro} />
-      <Stack.Screen name="Nhà hàng" component={Restaurant} />
-      <Stack.Screen name="Quán ăn" component={Food} />
       <Stack.Screen name="Di chuyển" component={Moving} />
-      <Stack.Screen name="Giải trí" component={Fun}/>
-      <Stack.Screen name="Mua sắm" component={Shopping}/>
-      <Stack.Screen name="Khách sạn" component={Hotel} />
-      <Stack.Screen name="Homestay" component={HomeStay} />
+      <Stack.Screen name="Find" component={FindScreen} options={{headerShown:false}}/>
+      <Stack.Screen name='Places' component={PlacesScreen} />
+      <Stack.Screen name='Info' component={PropertyInfoScreen}/>
+      <Stack.Screen name='User' component={UserScreen}/>
+      <Stack.Screen name='Confirmation' component={ConfirmationScreen}/>
     </Stack.Navigator>
     )
 }
@@ -49,7 +47,7 @@ function HomeScreen({navigation}){
     <View style={styles.main}>
     </View>
      <View style={styles.main}>
-        <TouchableOpacity onPress={() => navigation.navigate('Nhà hàng')}>
+        <TouchableOpacity >
         <View style={{ paddingLeft : 10 }}>
             <View style={styles.container}>
                 <Image style={styles.categoryImage} source={require('../Image/restaurant.png')}/>
@@ -57,7 +55,7 @@ function HomeScreen({navigation}){
             </View>
         </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=> navigation.navigate('Quán ăn')}>
+        <TouchableOpacity>
         <View style={{ paddingLeft : 10 }}>
             <View style={styles.container}>
                 <Image style={styles.categoryImage} source={require('../Image/food.png')}/>
@@ -75,7 +73,7 @@ function HomeScreen({navigation}){
         </TouchableOpacity>
     </View>
      <View style={styles.main}>
-        <TouchableOpacity onPress={()=> navigation.navigate('Giải trí')}>
+        <TouchableOpacity >
         <View style={{ paddingLeft : 10 }}>
             <View style={styles.container}>
                 <Image style={styles.categoryImage} source={require('../Image/entertain.png')}/>
@@ -83,7 +81,7 @@ function HomeScreen({navigation}){
             </View>
         </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=> navigation.navigate('Mua sắm')}>
+        <TouchableOpacity >
         <View style={{ paddingLeft : 10 }}>
             <View style={styles.container}>
                 <Image style={styles.categoryImage} source={require('../Image/shopping.png')}/>
@@ -91,7 +89,7 @@ function HomeScreen({navigation}){
             </View>
         </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=> navigation.navigate('Khách sạn')}>
+        <TouchableOpacity >
         <View style={{ paddingLeft : 10 }}>
             <View style={styles.container}>
                 <Image style={styles.categoryImage} source={require('../Image/hotel.png')}/>
@@ -101,7 +99,7 @@ function HomeScreen({navigation}){
         </TouchableOpacity> 
     </View>
      <View style={styles.main}>
-        <TouchableOpacity onPress={()=> navigation.navigate('Homestay')}>
+        <TouchableOpacity >
         <View style={{ paddingLeft : 10 }}>
             <View style={styles.container}>
                 <Image style={styles.categoryImage} source={require('../Image/homestay.png')}/>
@@ -109,7 +107,7 @@ function HomeScreen({navigation}){
             </View>
         </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=> navigation.navigate('Lời khuyên')}>
+        <TouchableOpacity >
         <View style={{ paddingLeft : 10 }}>
             <View style={styles.container}>
                 <Image style={styles.categoryImage} source={require('../Image/recomment.png')}/>
@@ -117,7 +115,7 @@ function HomeScreen({navigation}){
             </View>
         </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=> navigation.navigate('Giới thiệu')}>
+        <TouchableOpacity >
         <View style={{ paddingLeft : 10 }}>
             <View style={styles.container}>
                 <Image style={styles.categoryImage} source={require('../Image/idea.png')}/>

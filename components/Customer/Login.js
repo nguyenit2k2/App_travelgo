@@ -13,8 +13,8 @@ const Stack = createNativeStackNavigator();
 export default function LoginNavigation(){
     return(
     <Stack.Navigator >
-    <Stack.Screen name="Đăng Nhập" component={Login}   />
-    <Stack.Screen name="Đăng Kí" component={Register} />
+    <Stack.Screen name="Đăng Nhập" component={Login}  options={{headerShown: false}} />
+    <Stack.Screen name="Đăng Kí" component={Register} options={{headerShown: false}}/>
     </Stack.Navigator>
     )
 }
