@@ -1,19 +1,72 @@
 import {
-    StyleSheet,
-    Text,
-    View,
-    SafeAreaView,
-    KeyboardAvoidingView,
-    TextInput,
-    Pressable,
-  } from "react-native";
-  import React, { useState, useEffect } from "react";
-  import { useNavigation } from "@react-navigation/native";
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  KeyboardAvoidingView,
+  TextInput,
+  Pressable,
+  Alert 
+} from "react-native";
+import React, { useState } from "react";
+import axios from 'axios';
+import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import RegisterScreen from "./RegisterScreen";
+import TabNavigation from "./TabNavigation";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+const Stack = createNativeStackNavigator();
+
+function LoginNavigation(){
+    return(
+    <Stack.Navigator>
+       <Stack.Screen name="Login" component={LoginScreen} options={{headerShown:false}}/>
+       <Stack.Screen name="Register" component={RegisterScreen} options={{headerShown:false}}/>
+      <Stack.Screen name="TabNavigation" component={TabNavigation} options={{headerShown:false}} />
+    </Stack.Navigator>
+    )
+}
 
 const LoginScreen = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const navigation = useNavigation();
+  
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigation = useNavigation();
+  
+  const handleEmailChange = (value) => {
+    setEmail(value);
+  };
+
+  const handlePasswordChange = (value) => {
+    setPassword(value);
+  };
+  const handleSubmit = () => {
+    if (!email || !password) {
+      Alert.alert('Error', 'Please enter your email and password');
+    } else {
+      axios.post('/login', { email, password })
+        .then(response => {
+          const user = response.data.user;
+          const userString = user.toString();
+    // Lưu token vào AsyncStorage
+          AsyncStorage.setItem('user', userString)
+            .then(() => {
+
+              console.log(userString);
+              navigation.navigate('TabNavigation');
+            })
+            .catch(error => {
+              console.log('Error saving user id: ', error);
+            });
+        })
+        .catch(error => {
+          console.log(error.message);
+          Alert.alert('Error', 'Incorrect email or password');
+        });
+    }
+  };
+
   return (
     <SafeAreaView
       style={{
@@ -48,8 +101,8 @@ const LoginScreen = () => {
 
             <TextInput
               value={email}
-              onChangeText={(text) => setEmail(text)}
-              placeholder="enter your email id"
+              onChangeText={handleEmailChange}
+              placeholder="Enter your email"
               placeholderTextColor={"black"}
               style={{
                 fontSize: email ? 18 : 18,
@@ -68,7 +121,7 @@ const LoginScreen = () => {
 
             <TextInput
               value={password}
-              onChangeText={(text) => setPassword(text)}
+              onChangeText={handlePasswordChange}
               secureTextEntry={true}
               placeholder="Password"
               placeholderTextColor={"black"}
@@ -84,6 +137,7 @@ const LoginScreen = () => {
         </View>
 
         <Pressable
+          onPress={handleSubmit}
           style={{
             width: 200,
             backgroundColor: "#003580",
@@ -116,9 +170,9 @@ const LoginScreen = () => {
         </Pressable>
       </KeyboardAvoidingView>
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default LoginScreen
+export default LoginNavigation;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

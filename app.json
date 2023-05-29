@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "DanangTourist",
-    "slug": "DanangTourist",
+    "name": "travelgo",
+    "slug": "travelgo",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

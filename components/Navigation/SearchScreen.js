@@ -21,6 +21,44 @@ import { ModalTitle } from "react-native-modals";
 import { SlideAnimation } from "react-native-modals";
 import { ModalContent } from "react-native-modals";
 import { useNavigation, useRoute } from "@react-navigation/native";
+
+import FindScreen from './FindScreen';
+import PlacesScreen from './PlacesScreen';
+import PropertyInfoScreen from './PropertyInfoScreen';
+import UserScreen from './UserScreen';
+import ConfirmationScreen from './ConfirmationScreen';
+import CartScreen from './CartScreen';
+import MapScreen from './MapScreen';
+import BookFlightScreen from "./BookingFlightScreen";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import FlightResultScreen from "./FlightResultScreen";
+import DetailFlightScreen from "./DetailFlightScreen";
+import BookCar from "./BookCar";
+import DetailCarScreen from "./DetailCarScreen";
+import CarResultScreen from "./CarResultScreen";
+const Stack = createNativeStackNavigator();
+
+function SearchNavigation(){
+    return(
+    <Stack.Navigator>
+       <Stack.Screen name="Search" component={SearchScreen} options={{headerShown:false}}/>
+      <Stack.Screen name="Find" component={FindScreen} options={{headerShown:false}}/>
+      <Stack.Screen name='Places' component={PlacesScreen} />
+      <Stack.Screen name='Info' component={PropertyInfoScreen}/>
+      <Stack.Screen name='User' component={UserScreen}/>
+      <Stack.Screen name='Confirmation' component={ConfirmationScreen}/>
+      <Stack.Screen name='Map' component={MapScreen}/>
+      <Stack.Screen name='BookFlight' component={BookFlightScreen}/>
+      <Stack.Screen name='ResultFlight' component={FlightResultScreen}/>
+      <Stack.Screen name='DetailFlight' component={DetailFlightScreen}/>
+      <Stack.Screen name='BookCar' component={BookCar}/>
+      <Stack.Screen name='CarResult' component={CarResultScreen}/>
+      <Stack.Screen name='CarDetail' component={DetailCarScreen}/>
+    </Stack.Navigator>
+    )
+}
+
+
 const SearchScreen = () => {
   const navigation = useNavigation();
   const [selectedDates, setSelectedDates] = useState();
@@ -151,7 +189,7 @@ const SearchScreen = () => {
                 }
                 centerAlign // optional text will align center or not
                 allowFontScaling={false} // optional
-                placeholder={"Apr 27, 2018→Jul 10, 2018"}
+                placeholder={"May 27, 2023→Jul 10, 2023"}
                 mode={"range"}
               />
             </Pressable>
@@ -210,7 +248,7 @@ const SearchScreen = () => {
                 width: 200,
                 height: 150,
                 marginTop: 10,
-                backgroundColor: "#f8dad9",
+                backgroundColor: "#2D99ae",
                 borderRadius: 10,
                 padding: 20,
                 marginHorizontal: 20,
@@ -545,4 +583,4 @@ const SearchScreen = () => {
   );
 };
 
-export default SearchScreen;
+export default SearchNavigation

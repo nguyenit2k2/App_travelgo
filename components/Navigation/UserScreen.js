@@ -1,17 +1,17 @@
 import {
-    Pressable,
-    StyleSheet,
-    Text,
-    TextInput,
-    View,
-    Alert,
-    ScrollView,
-  } from "react-native";
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  Alert,
+  ScrollView,
+} from "react-native";
 import React, { useLayoutEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
 const UserScreen = () => {
-    const navigation = useNavigation();
+  const navigation = useNavigation();
   const route = useRoute();
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -35,11 +35,13 @@ const UserScreen = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNo, setPhoneNo] = useState("");
+  const [userList, setUserList] = useState([]);
+
   const finalStep = () => {
     if (!firstName || !lastName || !email || !phoneNo) {
       Alert.alert(
         "Invalide Details",
-        "Please ente all the fields",
+        "Please enter all the fields",
         [
           {
             text: "Cancel",
@@ -52,6 +54,13 @@ const UserScreen = () => {
       );
     }
     if (firstName && lastName && email && phoneNo) {
+      const newUser = {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        phoneNo: phoneNo,
+      };
+      setUserList([...userList, newUser]);
       navigation.navigate("Confirmation", {
         oldPrice: route.params.oldPrice,
         newPrice: route.params.newPrice,
@@ -61,107 +70,116 @@ const UserScreen = () => {
         rating: route.params.rating,
         startDate: route.params.startDate,
         endDate: route.params.endDate,
-        rooms:route.params.rooms,
+        rooms: route.params.rooms,
         phone: phoneNo,
-        email:email
+        email: email,
+        firstName : firstName,
+        lastName : lastName
       });
     }
   };
-   
+
   return (
     <>
-        <ScrollView>
+      <ScrollView>
         <View style={{ padding: 20 }}>
-        <View style={{ flexDirection: "column", gap: 10 }}>
-          <Text>First Name</Text>
-          <TextInput
-            value={firstName}
-            onChangeText={(text) => setFirstName(text)}
-            style={{ padding: 10, borderColor: "gray", borderWidth: 1 }}
-          />
-        </View>
-
-        <View style={{ flexDirection: "column", gap: 10, marginTop: 10 }}>
-          <Text>Last Name</Text>
-          <TextInput
-            value={lastName}
-            onChangeText={(text) => setLastName(text)}
-            style={{ padding: 10, borderColor: "gray", borderWidth: 1 }}
-          />
-        </View>
-
-        <View style={{ flexDirection: "column", gap: 10, marginTop: 10 }}>
-          <Text>Email</Text>
-          <TextInput
-            value={email}
-            onChangeText={(text) => setEmail(text)}
-            style={{ padding: 10, borderColor: "gray", borderWidth: 1 }}
-          />
-        </View>
-
-        <View style={{ flexDirection: "column", gap: 10, marginTop: 10 }}>
-          <Text>Phone no</Text>
-          <TextInput
-            value={phoneNo}
-            onChangeText={(text) => setPhoneNo(text)}
-            style={{ padding: 10, borderColor: "gray", borderWidth: 1 }}
-          />
-        </View>
-      </View>
-      <Pressable
-        style={{
-          backgroundColor: "white",
-          marginTop: 50,
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: 40,
-          padding: 10,
-        }}
-      >
-        <View>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-
-              marginTop: 4,
-              gap: 8,
-            }}
-          >
-            <Text
-              style={{
-                color: "red",
-                fontSize: 20,
-                textDecorationLine: "line-through",
-              }}
-            >
-              {route.params.oldPrice * route.params.rooms}
-            </Text>
-            <Text style={{ fontSize: 20 }}>
-              Rs {route.params.newPrice * route.params.rooms}
-            </Text>
+          <View style={{ flexDirection: "column", gap: 10 }}>
+            <Text>First Name</Text>
+            <TextInput
+              value={firstName}
+              onChangeText={(text) => setFirstName(text)}
+              style={{ padding: 10, borderColor: "gray", borderWidth: 1 }}
+            />
           </View>
-          <Text>
-            You Saved {route.params.oldPrice* route.params.rooms - route.params.newPrice* route.params.rooms} rupees
-          </Text>
+
+          <View style={{ flexDirection: "column", gap: 10, marginTop: 10 }}>
+            <Text>Last Name</Text>
+            <TextInput
+              value={lastName}
+              onChangeText={(text) => setLastName(text)}
+              style={{ padding: 10, borderColor: "gray", borderWidth: 1 }}
+            />
+          </View>
+
+          <View style={{ flexDirection: "column", gap: 10, marginTop: 10 }}>
+            <Text>Email</Text>
+            <TextInput
+              value={email}
+              onChangeText={(text) => setEmail(text)}
+              style={{ padding: 10, borderColor: "gray", borderWidth: 1 }}
+            />
+          </View>
+
+          <View style={{ flexDirection: "column", gap: 10, marginTop: 10 }}>
+            <Text>Phone no</Text>
+            <TextInput
+              value={phoneNo}
+              onChangeText={(text) => setPhoneNo(text)}
+              style={{ padding: 10, borderColor: "gray", borderWidth: 1 }}
+            />
+          </View>
         </View>
         <Pressable
           onPress={finalStep}
-          style={{ backgroundColor: "#007FFF", padding: 10, borderRadius: 5 }}
+          style={{
+            backgroundColor: "white",
+            marginTop: 50,
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: 40,
+            padding: 10,
+          }}
         >
-          <Text style={{ textAlign: "center", color: "white", fontSize: 15 }}>
-            Final Step
-          </Text>
+          <View>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                marginTop: 4,
+                gap: 8,
+              }}
+            >
+              <Text
+                style={{
+                  color: "red",
+                  fontSize: 20,
+                  textDecorationLine: "line-through",
+                }}
+              >
+                {route.params.oldPrice * route.params.rooms}
+              </Text>
+              <Text style={{ fontSize: 20 }}>
+                Rs {route.params.newPrice * route.params.rooms}
+              </Text>
+            </View>
+            <Text>
+              You Saved{" "}
+              {route.params.oldPrice * route.params.rooms -
+                route.params.newPrice * route.params.rooms}{" "}
+              rupees
+            </Text>
+          </View>
+          <Pressable
+            onPress={finalStep}
+            style={{
+              backgroundColor: "#007FFF",
+              padding: 10,
+              borderRadius: 5,
+            }}
+          >
+            <Text
+              style={{ textAlign: "center", color: "white", fontSize: 15 }}
+            >
+              Final Step
+            </Text>
+          </Pressable>
         </Pressable>
-      </Pressable>
-        </ScrollView>
-      
-
+      </ScrollView>
     </>
-  )
-}
+  );
+};
 
-export default UserScreen
+export default UserScreen;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

@@ -11,7 +11,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { ModalPortal } from 'react-native-modals';
-
+import axios from 'axios';
+import Login from './components/Navigation/LoginScreen'
+axios.defaults.baseURL= 'https://60a5-118-68-36-239.ngrok-free.app/api'
 const Stack = createNativeStackNavigator();
 
 // const Stack = createNativeStackNavigator();
@@ -22,8 +24,8 @@ export default class App extends React.Component{
           <>
                   <NavigationContainer>
                 <Stack.Navigator >
-                  <Stack.Screen name="Splash" component={TravelGo} options={{headerShown: false}}/>
-                  <Stack.Screen name="Tabnavigation" component={TabNavigation} options={{headerShown: false}}/>
+                  <Stack.Screen name="TravelGo" component={TravelGo} options={{headerShown: false}}/>
+                  <Stack.Screen name="Login" component={Login} options={{headerShown: false}}/>
                 </Stack.Navigator>
                 </NavigationContainer>
                 <ModalPortal />
@@ -42,7 +44,7 @@ function TravelGo({navigation}){
     <Text style={styles.subtitle}>Welcome to my app!</Text>
   </View>
       <View style={styles.item}>
-        <TouchableOpacity onPress={()=> navigation.navigate('Tabnavigation')}>
+        <TouchableOpacity onPress={()=> navigation.navigate('Login')}>
           <Text style={styles.text}>GO</Text>
         </TouchableOpacity>
       </View>

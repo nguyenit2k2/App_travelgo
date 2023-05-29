@@ -25,7 +25,9 @@ const PropertyCard = ({
     <View >
       <Pressable
       onPress={()=> navigation.navigate("Info",{
+
         name:property.name,
+        image:property.image,
         rating : property.rating,
         oldPrice: property.oldPrice,
         newPrice: property.newPrice,
@@ -33,7 +35,8 @@ const PropertyCard = ({
         rooms :rooms,
         adults :adults,
         children :children,
-        selectedDates:selectedDates
+        selectedDates:selectedDates,
+        id: property.id
 
       })}
         style={{ margin: 15, flexDirection: "row", backgroundColor: "white",borderRadius:10,padding:10}}

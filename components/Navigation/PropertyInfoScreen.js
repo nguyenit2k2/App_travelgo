@@ -194,7 +194,9 @@ const PropertyInfoScreen = () => {
             }}
           />
           <View style={{alignItems: "center",justifyContent: "center"}}>
-          <Pressable     onPress={() => navigation.navigate("User",{
+          <Pressable     onPress={() => navigation.navigate("Confirmation",{
+        name:route.params.name,
+        image:route.params.image,
         rooms:route.params.rooms,
         oldPrice:route.params.oldPrice,
         newPrice:route.params.newPrice,
@@ -203,7 +205,8 @@ const PropertyInfoScreen = () => {
         adults:route.params.adults,
         rating:route.params.rating,
         startDate:route.params.selectedDates.startDate,
-        endDate:route.params.selectedDates.endDate
+        endDate:route.params.selectedDates.endDate,
+        id: route.params.id
       })}
         style={{
           backgroundColor: "#6CB4EE",

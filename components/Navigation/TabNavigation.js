@@ -4,11 +4,12 @@ import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Settings from './Settings';
 import HomeScreen from './HomeScreen';
-import CartScreen from './CartScreen';
-import SearchScreen from './SearchScreen';
+import Cart from './CartScreen';
+import SearchScreen from './SearchScreen'
+
 import { Feather } from '@expo/vector-icons';
+import ProfileScreen from './ProfileScreen';
 const Tab = createBottomTabNavigator();
 
 export default function TabNavigation() {
@@ -20,14 +21,14 @@ export default function TabNavigation() {
       component={HomeScreen}
       options={{
         headerShown: false,
-        tabBarLabel: 'Trang chủ',
+        tabBarLabel: 'Home',
         tabBarIcon: ({ color, size }) => (
           <MaterialCommunityIcons name="home" color={color} size={size} />
         ),
       }}
     />
     <Tab.Screen
-      name="Search"
+      name="SearchScreen"
       component={SearchScreen}
       options={{
         headerShown: false,
@@ -38,11 +39,22 @@ export default function TabNavigation() {
       }}
     />
     <Tab.Screen
-      name="Tài Khoản"
-      component={Settings}
+      name="Cart"
+      component={Cart}
       options={{
         headerShown: false,
-        tabBarLabel: 'Tài Khoản',
+        tabBarLabel: 'Cart',
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="cart" color={color} size={size} />
+        ),
+      }}
+    />
+    <Tab.Screen
+      name="Tài Khoản"
+      component={ProfileScreen}
+      options={{
+        headerShown: false,
+        tabBarLabel: 'Profile',
         tabBarIcon: ({ color, size }) => (
           <MaterialCommunityIcons name="account" color={color} size={size} />
         ),

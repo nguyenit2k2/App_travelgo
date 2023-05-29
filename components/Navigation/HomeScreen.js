@@ -1,38 +1,46 @@
 import * as React from 'react';
 import { Text, View, ScrollView, FlatList, Image, TouchableOpacity } from 'react-native';
 import { StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { StatusBar } from 'expo-status-bar';
 
 import Moving from '../Items/Moving';
-import { Link } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import FindScreen from './FindScreen';
-import PlacesScreen from './PlacesScreen';
-import PropertyInfoScreen from './PropertyInfoScreen';
-import UserScreen from './UserScreen';
-import ConfirmationScreen from './ConfirmationScreen';
-import LoginScreen from './LoginScreen';
-import RegisterScreen from './RegisterScreen';
-
-
+import { useEffect } from 'react';
+import { BackHandler } from 'react-native';
+import Restaurant from '../Items/Restaurant';
+import Food from '../Items/Food';
+import Hotel from '../Items/Hotel';
+import Intro from '../Items/Intro';
+import Recomment from '../Items/Recomment';
+import HomeStay from '../Items/HomeStay';
+import Shopping from '../Items/Shopping';
+import Fun from '../Items/Fun';
 const Stack = createNativeStackNavigator();
 
 function HomeNavigation(){
+    const handleBackButton = () => {
+        return true; // Chặn sự kiện quay lại màn hình trước đó
+      };
+      
+      // Đăng ký hàm xử lý sự kiện khi mount component
+      useEffect(() => {
+        BackHandler.addEventListener('hardwareBackPress', handleBackButton);
+        return () => {
+          BackHandler.removeEventListener('hardwareBackPress', handleBackButton);
+        };
+      }, []);
     return(
     <Stack.Navigator>
-       <Stack.Screen name="Login" component={LoginScreen} options={{headerShown:false}}/>
-       <Stack.Screen name="Register" component={RegisterScreen} options={{headerShown:false}}/>
+       
       <Stack.Screen name="TravelGO" component={HomeScreen} />
-      <Stack.Screen name="Di chuyển" component={Moving} />
-      <Stack.Screen name="Find" component={FindScreen} options={{headerShown:false}}/>
-      <Stack.Screen name='Places' component={PlacesScreen} />
-      <Stack.Screen name='Info' component={PropertyInfoScreen}/>
-      <Stack.Screen name='User' component={UserScreen}/>
-      <Stack.Screen name='Confirmation' component={ConfirmationScreen}/>
+      <Stack.Screen name="Moving" component={Moving} />
+      <Stack.Screen name="Advice" component={Recomment} />
+      <Stack.Screen name="Intro" component={Intro} />
+      <Stack.Screen name="Restaurant" component={Restaurant} />
+      <Stack.Screen name="Food" component={Food} />
+      <Stack.Screen name="Enterntain" component={Fun}/>
+      <Stack.Screen name="Shopping" component={Shopping}/>
+      <Stack.Screen name="The Hotel" component={Hotel} />
+      <Stack.Screen name="Homestay" component={HomeStay} />
     </Stack.Navigator>
     )
 }
@@ -42,64 +50,64 @@ export default HomeNavigation;
 function HomeScreen({navigation}){
     return (
     <ScrollView>
-    <Image style={{width : 360 , height : 250,marginBottom : 10, padding: 0,borderRadius : 10}} source={{uri : 'https://img3.thuthuatphanmem.vn/uploads/2019/07/13/hinh-anh-thanh-pho-da-nang-dep-ve-dem_085827967.png'}}/>
+    <Image style={{width : 360 , height : 250,marginBottom : 10, padding: 0,borderRadius : 10}} source={{uri : 'https://image.vietstock.vn/2023/02/13/du-lich-viet-nam-vi-sao-that-bai_1537992.jpg'}}/>
     <View style={{paddingBottom : 20}}>
     <View style={styles.main}>
     </View>
      <View style={styles.main}>
-        <TouchableOpacity >
+        <TouchableOpacity onPress={() => navigation.navigate('Restaurant')}>
         <View style={{ paddingLeft : 10 }}>
             <View style={styles.container}>
                 <Image style={styles.categoryImage} source={require('../Image/restaurant.png')}/>
-                <Text style={styles.title}>Nhà hàng</Text>    
+                <Text style={styles.title}>Restaurant</Text>    
             </View>
         </View>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=> navigation.navigate('Food')}>
         <View style={{ paddingLeft : 10 }}>
             <View style={styles.container}>
                 <Image style={styles.categoryImage} source={require('../Image/food.png')}/>
-                <Text style={styles.title}>Quán ăn</Text>    
+                <Text style={styles.title}>Food</Text>    
             </View>
         </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=> navigation.navigate('Di chuyển')}>
+        <TouchableOpacity onPress={()=> navigation.navigate('Moving')}>
         <View style={{ paddingLeft : 10 }}>
             <View style={styles.container}>
                 <Image style={styles.categoryImage} source={require('../Image/motorbike.png')}/>
-                <Text style={styles.title}>Di chuyển</Text>    
+                <Text style={styles.title}>Moving</Text>    
             </View>
         </View>
         </TouchableOpacity>
     </View>
      <View style={styles.main}>
-        <TouchableOpacity >
+        <TouchableOpacity onPress={()=> navigation.navigate('Enterntain')}>
         <View style={{ paddingLeft : 10 }}>
             <View style={styles.container}>
                 <Image style={styles.categoryImage} source={require('../Image/entertain.png')}/>
-                <Text style={styles.title}>Giải trí</Text>    
+                <Text style={styles.title}>Enterntain</Text>    
             </View>
         </View>
         </TouchableOpacity>
-        <TouchableOpacity >
+        <TouchableOpacity onPress={()=> navigation.navigate('Shopping')}>
         <View style={{ paddingLeft : 10 }}>
             <View style={styles.container}>
                 <Image style={styles.categoryImage} source={require('../Image/shopping.png')}/>
-                <Text style={styles.title}>Mua sắm</Text>    
+                <Text style={styles.title}>Shopping</Text>    
             </View>
         </View>
         </TouchableOpacity>
-        <TouchableOpacity >
+        <TouchableOpacity onPress={()=> navigation.navigate('The Hotel')}>
         <View style={{ paddingLeft : 10 }}>
             <View style={styles.container}>
                 <Image style={styles.categoryImage} source={require('../Image/hotel.png')}/>
-                <Text style={styles.title}>Khách sạn</Text>    
+                <Text style={styles.title}>The Hotel</Text>    
             </View>
         </View>
         </TouchableOpacity> 
     </View>
      <View style={styles.main}>
-        <TouchableOpacity >
+        <TouchableOpacity onPress={()=> navigation.navigate('Homestay')}>
         <View style={{ paddingLeft : 10 }}>
             <View style={styles.container}>
                 <Image style={styles.categoryImage} source={require('../Image/homestay.png')}/>
@@ -107,19 +115,19 @@ function HomeScreen({navigation}){
             </View>
         </View>
         </TouchableOpacity>
-        <TouchableOpacity >
+        <TouchableOpacity onPress={()=> navigation.navigate('Advice')}>
         <View style={{ paddingLeft : 10 }}>
             <View style={styles.container}>
                 <Image style={styles.categoryImage} source={require('../Image/recomment.png')}/>
-                <Text style={styles.title}>Lời khuyên</Text>    
+                <Text style={styles.title}>Advice</Text>    
             </View>
         </View>
         </TouchableOpacity>
-        <TouchableOpacity >
+        <TouchableOpacity onPress={()=> navigation.navigate('Intro')}>
         <View style={{ paddingLeft : 10 }}>
             <View style={styles.container}>
                 <Image style={styles.categoryImage} source={require('../Image/idea.png')}/>
-                <Text style={styles.title}>Giới thiệu</Text>    
+                <Text style={styles.title}>Introduce</Text>    
             </View>
         </View>
         </TouchableOpacity>
